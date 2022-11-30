@@ -1,5 +1,5 @@
 import TicketTypeRequest from './lib/TicketTypeRequest.js';
-// import InvalidPurchaseException from './lib/InvalidPurchaseException.js';
+import InvalidPurchaseException from './lib/InvalidPurchaseException.js';
 import SeatReservationService from '../thirdparty/seatbooking/SeatReservationService.js';
 import TicketPaymentService from '../thirdparty/paymentgateway/TicketPaymentService.js';
 
@@ -40,7 +40,7 @@ export default class TicketService {
     } else if (ticketTypeRequest.#Type.includes('CHILD')) {
       return this.#ticketpayment + 10;
     } else {
-      // throw new InvalidPurchaseException();
+      throw new InvalidPurchaseException();
     }
 
     // return this.#ticketpayment;
@@ -48,7 +48,7 @@ export default class TicketService {
 
   #seatResevation(ticketTypeRequest, reservedseats) {
     if (reservedseats > 20) {
-      // throw new InvalidPurchaseException();
+      throw new InvalidPurchaseException();
     }
     if (ticketTypeRequest.#Type.includes('ADULT' || 'CHILDREN')) {
       return this.#reservedseats + 1;
@@ -70,10 +70,10 @@ export default class TicketService {
 
       this.#accountId = accountId;
       this.#ticketTypeRequests = ticketTypeRequests;
-      this.#getId();
-      this.#getTicketType();
-      this.#seatResevation();
-      this.#totalPayment();
+      // this.#getId();
+      // this.#getTicketType();
+      // this.#seatResevation();
+      // this.#totalPayment();
     }
 
     // throws InvalidPurchaseException
@@ -88,10 +88,10 @@ const ticketType = new TicketTypeRequest('ADULT', 1);
 
 const test = TicketService.purchaseTickets(1, ['ADULT']);
 
-console.log(ticketType.getNoOfTickets());
-console.log(ticketType.getTicketType());
-console.log(purchaseTickets());
-console.log(test.purchaseTickets());
+// console.log(ticketType.getNoOfTickets());
+// console.log(ticketType.getTicketType());
+// console.log(purchaseTickets());
+// console.log(test.purchaseTickets());
 
 const reserveSeat = new SeatReservationService();
 
